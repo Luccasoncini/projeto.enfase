@@ -67,3 +67,14 @@
 .App-item-actions a:hover {
   cursor: pointer;
 }
+
+.option {
+  background-color: white;
+  margin: 3px;
+  border-radius: 20px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}

@@ -67,7 +67,7 @@ const CreateQuestion = () => {
             <br />
             <input
               type="text"
-              name="name"
+              name="questionDescription"
               ref={(node) => {
                 questionDescriptionInput = node;
               }}
@@ -80,7 +80,7 @@ const CreateQuestion = () => {
             <br />
             <input
               type="text"
-              name="sugar"
+              name="optionDescription"
               ref={(node) => {
                 optionDescriptionInput = node;
               }}
@@ -93,7 +93,7 @@ const CreateQuestion = () => {
             <br />
             <input
               type="text"
-              name="calories"
+              name="isTrue"
               ref={(node) => {
                 isTrueInput = node;
               }}

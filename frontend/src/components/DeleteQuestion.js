@@ -62,13 +62,18 @@ const DeleteQuestion = () => {
         }}
       >
         <p>
-          Deseja excluir a pergunta  "<strong>{data.question.questionDescription}</strong>"
+          Deseja excluir a pergunta  
+          <br/>
+          <br/>
+          "<strong>{data.question.questionDescription}</strong>"
         </p>
         <p className="App-close-btn">
           <Link to="/">
             <button>X</button>
           </Link>
         </p>
+        <br/>
+        <br/>
         <p>
           <button className="App-btn" type="submit">
             Excluir

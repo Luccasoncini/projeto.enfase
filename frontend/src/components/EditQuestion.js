@@ -4,11 +4,11 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { GET_QUESTION_BY_ID } from "./Question";
 
 const UPDATE_QUESTION = gql`
-  mutation UpdateQuestion(
+  mutation updateQuestion(
     $id: String!
     $questionDescription: String
     $optionDescription: String
-    $isTrue: String
+    $isTrue: Boolean
   ) {
     updateQuestion(
       id: $id
@@ -16,7 +16,7 @@ const UPDATE_QUESTION = gql`
     ) {
       id
       questionDescription
-      options {
+      Options {
         optionDescription
         isTrue
       }
@@ -67,7 +67,7 @@ const EditQuestion = () => {
             <br />
             <input
               type="text"
-              name="name"
+              name="questionDescription"
               defaultValue={data.question.questionDescription}
               ref={(node) => {
                 questionDescriptionInput = node;
@@ -77,30 +77,30 @@ const EditQuestion = () => {
         </p>
         <p>
           <label>
-            Respostas
+            <ul>
+              {data.question.Options.map(({ optionDescription, isTrue }) => ( 
+                <>  
+                  <input
+                    type="text"
+                    name="optionDescription"
+                    defaultValue={optionDescription}
+                    ref={(node) => {
+                      optionDescriptionInput = node;
+                    }}
+                  />
+                  <input
+                    type="text"
+                    name="isTrue"
+                    defaultValue={isTrue}
+                    ref={(node) => {
+                      isTrueInput = node;
+                    }}
+                  />
+                </>  
+            ))}
+            </ul>
             <br />
-            <input
-              type="text"
-              name="sugar"
-              defaultValue={data.question.Options.optionDescription}
-              ref={(node) => {
-                optionDescriptionInput = node;
-              }}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            Calorias
-            <br />
-            <input
-              type="text"
-              name="calories"
-              defaultValue={data.question.Options.isTrue}
-              ref={(node) => {
-                isTrueInput = node;
-              }}
-            />
+ 
           </label>
         </p>
         <p className="App-close-btn">

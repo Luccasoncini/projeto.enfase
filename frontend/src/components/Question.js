@@ -1,6 +1,7 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { useParams, Link } from "react-router-dom";
+import Options from "./Options";
 
 export const GET_QUESTION_BY_ID = gql`
   query GetQuestion($id: ID!) {
@@ -16,39 +17,31 @@ export const GET_QUESTION_BY_ID = gql`
 `;
 
 const Question = () => {
+
   const { id } = useParams();
   const { loading, error, data } = useQuery(GET_QUESTION_BY_ID, {
-    variables: { id },
-  });
-
+    variables: { id }});
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   return (
+  <>
     <div className="App-viewbox">
       <p>
-        <strong>Pergunta: </strong>
         {data.question.questionDescription}
       </p>
-      <p>
-        <strong>Respostas: </strong>
-        {data.question.Options.optionDescription}
-      </p>
-      <p>
-        <strong>Verdadeiro: </strong>
-        {data.question.Options.isTrue}
-      </p>
+     
+      <ul>
+       <Options/>
+      </ul>
+      
       <p className="App-close-btn">
         <Link to="/">
           <button>✖</button>
         </Link>
       </p>
-      <p>
-        <Link to={`/editQuestion/${id}`}>
-          <button>Editar</button>
-        </Link>
-      </p>
     </div>
+  </>  
   );
 };
 
