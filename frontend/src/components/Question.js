@@ -23,7 +23,7 @@ const Question = () => {
     variables: { id }});
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
+    
   return (
   <>
     <div className="App-viewbox">

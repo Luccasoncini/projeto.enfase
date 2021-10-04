@@ -47,7 +47,7 @@ const QuestionsList = () => {
 
       <p>
         <Link to="/createQuestion">
-          <button>Nova Pergunta</button>
+          <button className="newQuestion">Nova Pergunta</button>
         </Link>
       </p>
     </>

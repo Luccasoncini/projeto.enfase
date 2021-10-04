@@ -12,7 +12,7 @@ const UPDATE_QUESTION = gql`
   ) {
     updateQuestion(
       id: $id
-      question: { questionDescription: $questionDescription, Options: { optionDescription: $optionDescription, isTrue: $isTrue } }
+      question: { questionDescription: $questionDescription, Options: [{ optionDescription: $optionDescription, isTrue: $isTrue }] }
     ) {
       id
       questionDescription
@@ -38,7 +38,7 @@ const EditQuestion = () => {
   });
 
   if (loading) return <p>Loading...</p>;
-  if (error || mutationError) return <p>Error :(</p>;
+  if (error || mutationError) return <p> Erro:(</p>;
 
   let questionDescriptionInput;
   let optionDescriptionInput;
@@ -50,22 +50,22 @@ const EditQuestion = () => {
         className="App-viewbox"
         onSubmit={(e) => {
           e.preventDefault();
-
-          updateQuestion({
+          console.log({Options: [{ optionDescription: optionDescriptionInput.value, isTrue: isTrueInput.value === "true" }]})
+           updateQuestion({
             variables: {
               id: data.question.id,
               questionDescription: questionDescriptionInput.value,
               optionDescription: optionDescriptionInput.value,
-              isTrue: isTrueInput.value,
+              isTrue: isTrueInput.value === "true",
             },
-          });
+          }); 
         }}
       >
         <p>
-          <label>
-            Pergunta
+          <label>Pergunta</label>  
             <br />
             <input
+              className="option"
               type="text"
               name="questionDescription"
               defaultValue={data.question.questionDescription}
@@ -73,14 +73,15 @@ const EditQuestion = () => {
                 questionDescriptionInput = node;
               }}
             />
-          </label>
+          
         </p>
-        <p>
-          <label>
-            <ul>
+        <div>
+          <label>Respostas</label>
+            <ul className="flex-container">
               {data.question.Options.map(({ optionDescription, isTrue }) => ( 
-                <>  
+                <div className="flex-row">  
                   <input
+                    className="option"
                     type="text"
                     name="optionDescription"
                     defaultValue={optionDescription}
@@ -89,6 +90,7 @@ const EditQuestion = () => {
                     }}
                   />
                   <input
+                    className="option"
                     type="text"
                     name="isTrue"
                     defaultValue={isTrue}
@@ -96,20 +98,17 @@ const EditQuestion = () => {
                       isTrueInput = node;
                     }}
                   />
-                </>  
+                </div>  
             ))}
             </ul>
-            <br />
- 
-          </label>
-        </p>
+        </div>
         <p className="App-close-btn">
           <Link to="/">
             <button type="button">X</button>
           </Link>
         </p>
         <p>
-          <button className="App-btn" type="submit">
+          <button className="newQuestion" type="submit">
             Salvar
           </button>
         </p>

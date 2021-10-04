@@ -33,7 +33,7 @@
 .App-close-btn {
   position: absolute;
   top: -100px;
-  right: -100px;
+  right: -150px;
 }
 
 .App-close-btn button {
@@ -72,9 +72,36 @@
   background-color: white;
   margin: 3px;
   border-radius: 20px;
+  text-align: center;
 }
+
+.optionWrong {
+  background-color: red;
+  margin: 3px;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+}
+
+.optionCorrect {
+  background-color: green;
+  margin: 3px;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+}
+
 
 .flex-container {
   display: flex;
   flex-direction: column;
 }
+
+.newQuestion {
+  border-radius: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+

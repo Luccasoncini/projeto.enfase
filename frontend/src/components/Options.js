@@ -15,6 +15,17 @@ export const GET_QUESTION_BY_ID = gql`
   }
 `;
 
+
+
+function verificarResposta(isTrue) {
+  
+  if (isTrue === true) {
+    console.log("true")
+  }else{
+    console.log("false")
+  }
+}
+
 const Options = () => {
 
   const { id } = useParams();
@@ -26,9 +37,9 @@ const Options = () => {
   return (
     <>
       <ul className="flex-container">
-        {data.question.Options.map(({ optionDescription }) => ( 
+        {data.question.Options.map(({ optionDescription, isTrue }) => ( 
             
-        <button className="option">{optionDescription}</button>
+        <button onClick = {() => {verificarResposta(isTrue)}} className="option">{optionDescription}</button>
 
         ))}
       </ul>

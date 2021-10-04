@@ -52,7 +52,7 @@ const CreateQuestion = () => {
             variables: {
               questionDescription: questionDescriptionInput.value,
               optionDescription: optionDescriptionInput.value,
-              isTrue: isTrueInput.value,
+              isTrue: isTrueInput.value === "true",
             },
           });
 
@@ -66,6 +66,7 @@ const CreateQuestion = () => {
             Qual a pergunta?
             <br />
             <input
+              className="option"
               type="text"
               name="questionDescription"
               ref={(node) => {
@@ -74,39 +75,88 @@ const CreateQuestion = () => {
             />
           </label>
         </p>
-        <p>
-          <label>
-            Resposta
-            <br />
-            <input
-              type="text"
-              name="optionDescription"
-              ref={(node) => {
-                optionDescriptionInput = node;
-              }}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            Verdadeiro/Falso
-            <br />
-            <input
-              type="text"
-              name="isTrue"
-              ref={(node) => {
-                isTrueInput = node;
-              }}
-            />
-          </label>
-        </p>
+          <ul className="flex-container">              
+            Respostas
+            <div className="flex-row">
+              <input
+                className="option"
+                type="text"
+                name="optionDescription"
+                ref={(node) => {
+                  optionDescriptionInput = node;
+                }}
+              />
+              <input
+                className="option"
+                type="text"
+                name="isTrue"
+                ref={(node) => {
+                  isTrueInput = node;
+                }}
+              />
+            </div>
+            <div className="flex-row">  
+              <input
+                className="option"
+                type="text"
+                name="optionDescription"
+                ref={(node) => {
+                  optionDescriptionInput = node;
+                }}
+              />
+              <input
+                className="option"
+                type="text"
+                name="isTrue"
+                ref={(node) => {
+                  isTrueInput = node;
+                }}
+              />
+            </div>
+            <div className="flex-row">  
+              <input
+                className="option"
+                type="text"
+                name="optionDescription"
+                ref={(node) => {
+                  optionDescriptionInput = node;
+                }}
+              />
+              <input
+                className="option"
+                type="text"
+                name="isTrue"
+                ref={(node) => {
+                  isTrueInput = node;
+                }}
+              />
+            </div>
+            <div className="flex-row">  
+              <input
+                className="option"
+                type="text"
+                name="optionDescription"
+                ref={(node) => {
+                  optionDescriptionInput = node;
+                }}
+              />
+              <input
+                className="option"
+                type="text"
+                name="isTrue"
+                ref={(node) => {
+                  isTrueInput = node;
+                }}
+              />
+            </div>  
+          </ul>
         <p className="App-close-btn">
           <Link to="/">
             <button>X</button>
           </Link>
         </p>
         <p>
-          <button className="App-btn" type="submit">
+          <button className="newQuestion" type="submit">
             Salvar
           </button>
         </p>
