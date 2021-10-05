@@ -6,13 +6,12 @@ import { GET_QUESTION_BY_ID } from "./Question";
 const UPDATE_QUESTION = gql`
   mutation updateQuestion(
     $id: String!
-    $questionDescription: String
-    $optionDescription: String
-    $isTrue: Boolean
+    $question: QuestionInput!
+
   ) {
     updateQuestion(
-      id: $id
-      question: { questionDescription: $questionDescription, Options: [{ optionDescription: $optionDescription, isTrue: $isTrue }] }
+      id: $id,
+      question: $question 
     ) {
       id
       questionDescription
@@ -41,8 +40,8 @@ const EditQuestion = () => {
   if (error || mutationError) return <p> Erro:(</p>;
 
   let questionDescriptionInput;
-  let optionDescriptionInput;
-  let isTrueInput;
+  let optionDescriptionInput = [];
+  let isTrueInput = [];
 
   return (
     <div>
@@ -50,13 +49,19 @@ const EditQuestion = () => {
         className="App-viewbox"
         onSubmit={(e) => {
           e.preventDefault();
-          console.log({Options: [{ optionDescription: optionDescriptionInput.value, isTrue: isTrueInput.value === "true" }]})
+          const question = {
+            questionDescription: questionDescriptionInput.value,
+            Options: optionDescriptionInput.map((option, index)=>{
+              return {
+                optionDescription: option.value,
+                isTrue: isTrueInput[index].value === "true"
+              }
+            })
+          }
            updateQuestion({
             variables: {
               id: data.question.id,
-              questionDescription: questionDescriptionInput.value,
-              optionDescription: optionDescriptionInput.value,
-              isTrue: isTrueInput.value === "true",
+              question
             },
           }); 
         }}
@@ -78,7 +83,7 @@ const EditQuestion = () => {
         <div>
           <label>Respostas</label>
             <ul className="flex-container">
-              {data.question.Options.map(({ optionDescription, isTrue }) => ( 
+              {data.question.Options.map(({ optionDescription, isTrue },index) => ( 
                 <div className="flex-row">  
                   <input
                     className="option"
@@ -86,7 +91,7 @@ const EditQuestion = () => {
                     name="optionDescription"
                     defaultValue={optionDescription}
                     ref={(node) => {
-                      optionDescriptionInput = node;
+                      optionDescriptionInput[index] = node;
                     }}
                   />
                   <input
@@ -95,7 +100,7 @@ const EditQuestion = () => {
                     name="isTrue"
                     defaultValue={isTrue}
                     ref={(node) => {
-                      isTrueInput = node;
+                      isTrueInput[index] = node;
                     }}
                   />
                 </div>  
