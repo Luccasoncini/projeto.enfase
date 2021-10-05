@@ -25,7 +25,13 @@ const CreateQuestion = () => {
   const history = useHistory();
 
   const [createQuestion, { loading, error }] = useMutation(CREATE_QUESTION, {
-    
+    update(cache, { data: { createQuestion } }) {
+      const { questions } = cache.readQuery({ query: GET_QUESTIONS });
+      cache.writeQuery({
+        query: GET_QUESTIONS,
+        data: { questions: questions.concat([createQuestion]) },
+      });
+    },
     onCompleted() {
       history.push(`/`);
     },
